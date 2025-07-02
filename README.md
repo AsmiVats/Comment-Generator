@@ -1,71 +1,79 @@
-# comment-generator README
+# Comment Generator
 
-This is the README for your extension "comment-generator". After writing up a brief description, we recommend including the following sections.
+Generate detailed comments for your code effortlessly with the Comment Generator VS Code extension.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+[Repository Link](https://github.com/AsmiVats/Comment-Generator)
 
 ---
 
-## Following extension guidelines
+## Features
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+- **Generate Code Comment**: Automatically generate descriptive comments for your code blocks.
+- **Improve Existing Comment**: Enhance and refine your existing code comments for better clarity.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## Installation
 
-## Working with Markdown
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AsmiVats/Comment-Generator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Comment-Generator
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Compile the extension:
+   ```bash
+   npm run compile
+   ```
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+## Usage
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+- Open your project in Visual Studio Code.
+- Use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac).
+- Search for and run:
+  - `Generate Code Comment` to create new comments.
+  - `Improve Existing Comment` to upgrade your current comments.
 
-## For more information
+## Commands
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+| Command                                   | Description                     |
+|--------------------------------------------|---------------------------------|
+| `Generate Code Comment`                    | Generates comments for code     |
+| `Improve Existing Comment`                 | Refines and improves comments   |
 
-**Enjoy!**
+## Development
+
+- **Build:**  
+  ```bash
+  npm run compile
+  ```
+- **Watch:**  
+  ```bash
+  npm run watch
+  ```
+- **Lint:**  
+  ```bash
+  npm run lint
+  ```
+- **Test:**  
+  ```bash
+  npm run test
+  ```
+
+## Requirements
+
+- Visual Studio Code v1.101.0 or above
+- Node.js (compatible with dev dependencies listed in `package.json`)
+
+## Project Structure
+
+- `src/`: Source code of the extension.
+- `out/`: Compiled extension files.
+- `.vscode/`: VS Code workspace configuration.
+- `CHANGELOG.md`: Project changelog.
+- `package.json`: Project configuration and scripts.
+
