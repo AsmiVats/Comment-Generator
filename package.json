@@ -9,7 +9,10 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:comment-generator.generateComment",
+    "onCommand:comment-generator.improveComment"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

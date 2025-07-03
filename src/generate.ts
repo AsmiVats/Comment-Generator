@@ -11,7 +11,7 @@ export async function generateComment(code: string): Promise<string> {
             body: JSON.stringify({
                 contents: [{  
                     parts: [{
-                        text: `Generate a concise, professional comment explaining the purpose and functionality of this 
+                        text: `Generate a short concise, professional comment explaining the purpose and functionality of this 
                         code:${code}
                         Only output the comment as plain text, do not wrap it in any markdown or code block.`
                     }]
