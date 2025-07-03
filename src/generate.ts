@@ -3,20 +3,21 @@ import { GeminiResponse } from './types';
 
 export async function generateComment(code: string): Promise<string> {
     try {
-        const prompt = `Generate a concise, professional code comment for this code.
-Focus on explaining the purpose and functionality. ${code}
-Comment:`;
-        const response = await fetch(
-        `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`,
-        {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
-                contents:[{parts:[{text:prompt}]}],
-            }),
-        }
-    );
-
+       const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{  
+                    parts: [{
+                        text: `Generate a concise, professional comment explaining the purpose and functionality of this 
+                        code:${code}
+                        Only output the comment as plain text, do not wrap it in any markdown or code block.`
+                    }]
+                }]
+            })
+        });
         if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
         }
