@@ -57,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
                 title: "Improving comment...",
                 cancellable: false
             }, async () => {
-                const improvedComment = await generateComment(`Improve this comment: ${selectedText}`);
+                const improvedComment = await generateComment(`Improve this comment and explain code properly: ${selectedText}`);
                 editor.edit(editBuilder => {
                     editBuilder.replace(selection, `// ${improvedComment}`);
                 });
