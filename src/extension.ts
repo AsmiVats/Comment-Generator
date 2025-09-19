@@ -25,7 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
 				title: "Generating comment",
 				cancellable: false
 			}, async () =>{
-				const comment = await generateComment(selectedText);
+				const languageId = editor.document.languageId;
+				const comment = await generateComment(selectedText,languageId);
 				const line = selection.start.line;
 				editor.edit(editBuilder => {
 					editBuilder.insert(new vscode.Position(line, 0), `// ${comment}\n`);
@@ -57,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
                 title: "Improving comment...",
                 cancellable: false
             }, async () => {
-                const improvedComment = await generateComment(`Improve this comment and explain code properly: ${selectedText}`);
+                const improvedComment = await generateComment(`Improve this comment and explain code properly: ${selectedText},language: ${editor.document.languageId}`, editor.document.languageId);
                 editor.edit(editBuilder => {
                     editBuilder.replace(selection, `// ${improvedComment}`);
                 });

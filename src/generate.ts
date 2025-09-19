@@ -1,9 +1,11 @@
 import { GEMINI_API_KEY, GEMINI_API_URL } from './config';
 import { GeminiResponse } from './types';
+import * as vscode from 'vscode';
 
-export async function generateComment(code: string): Promise<string> {
+
+export async function generateComment(code: string, languageId: string): Promise<string> {
     try {
-        const prompt = promptGenerator(code);
+        const prompt = promptGenerator(code, languageId);
        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: {
@@ -35,9 +37,8 @@ export async function generateComment(code: string): Promise<string> {
     }
 }
 
-function promptGenerator(code: string): string {
-    // detect language and structure
-    const language = detectLanguage(code);
+function promptGenerator(code: string, languageId: string): string {
+    // detect structure
     const hasFunctions = hasFunctionDefinitions(code);
     const hasClasses = hasClassDefinitions(code);
     const isScript = isLikelyScript(code);
@@ -46,15 +47,15 @@ function promptGenerator(code: string): string {
     let prompt = `Generate a short, concise, professional comment explaining the `;
     
     if (hasClasses && hasFunctions) {
-        prompt += `overall architecture and purpose of this ${language} code, including main classes and functions`;
+        prompt += `overall architecture and purpose of this ${languageId} code, including main classes and functions`;
     } else if (hasClasses) {
-        prompt += `purpose and structure of this ${language} class`;
+        prompt += `purpose and structure of this ${languageId} class`;
     } else if (hasFunctions) {
-        prompt += `functionality and purpose of this ${language} function`;
+        prompt += `functionality and purpose of this ${languageId} function`;
     } else if (isScript) {
-        prompt += `purpose and execution flow of this ${language} script`;
+        prompt += `purpose and execution flow of this ${languageId} script`;
     } else {
-        prompt += `purpose and functionality of this ${language} code`;
+        prompt += `purpose and functionality of this ${languageId} code`;
     }
     
     prompt += `:\n${code}\n\nOnly output the comment as plain text, do not wrap it in any markdown or code block.`;
@@ -63,17 +64,7 @@ function promptGenerator(code: string): string {
 }
 
 
-function detectLanguage(code: string): string {
-    if (code.includes('def ') && code.includes('import ')) return 'Python';
-    if (code.includes('function ') || code.includes('=>') || code.includes('const ') || code.includes('let ')) return 'JavaScript/TypeScript';
-    if (code.includes('public class ') || code.includes('private ') || code.includes('void ')) return 'Java';
-    if (code.includes('#include ') || code.includes('int main()')) return 'C/C++';
-    if (code.includes('<?php')) return 'PHP';
-    if (code.includes('package ') || code.includes('func ')) return 'Go';
-    if (code.includes('fn ') || code.includes('let ') || code.includes('mut ')) return 'Rust';
-    if (code.includes('using ') && (code.includes('namespace ') || code.includes('class '))) return 'C#';
-    return 'code';
-}
+
 
 function hasFunctionDefinitions(code: string): boolean {
     const functionPatterns = [
